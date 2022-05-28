@@ -1,12 +1,8 @@
 from bs4 import BeautifulSoup as BS
 from requests import get
-import json
-import os
+from util.data_cache import openJson
 
-file_path = os.path.dirname(os.path.realpath(__file__))
-data_path = '{}/../'.format(file_path)
-with open(data_path + 'config/config.json', 'r') as f:
-    headers = json.load(f)['headers']
+headers = openJson('config/config.json')['headers']
 
 def retryGet(url, retry, cache=True):
     if retry < 5:
